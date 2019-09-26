@@ -1,0 +1,62 @@
+<canvas id="gc" width="800" height="800"> </canvas>
+<script type="text/javascript">
+	//alert("1");
+	var rob;
+	var x = 320;
+	var y = 320;
+		window.onload=function(){
+	//		alert("2");
+		canObj = document.getElementById('gc');
+		ctx = canObj.getContext("2d");
+		ctx.fillStyle="Black";
+		ctx.fillRect(0,0,canObj.width,canObj.height);
+		rob = new Robot();
+		rob.loadRobot();
+		document.addEventListener("keydown",rob.keyPush);
+	}
+	function Robot() {
+		this.loadRobot = function(){
+			ctx.fillStyle="white";
+    		ctx.fillRect(x,y,160,160);	
+		}
+		this.removeRobot = function(){
+			ctx.fillStyle = "Black";
+			//alert("remove"+x+"||"+y);
+			ctx.fillRect(x,y,160,160);
+		}
+		this.keyPush = function(evt) {
+
+			switch(evt.keyCode) {
+	       		case 37:
+		            //alert("left");
+		            //alert(x);
+		            rob.removeRobot();
+		            (x - 160) < 0 ? 0 : x = x - 160;
+		            rob.loadRobot();
+		            //ctx.fillRect(rob.x - 160,rob.y,160,160);	
+		            break;
+		        case 38:
+		            //alert("up");
+		            rob.removeRobot();
+		            (y - 160) < 0 ? 0 : y = y - 160;
+		            rob.loadRobot();
+		            break;
+		        case 39:
+		            //alert("right");
+		            rob.removeRobot();
+		            //x = 800 - 160;
+		            (x + 160) >= 800 ? x = 800 - 160 : x = x + 160;
+		            rob.loadRobot();
+		            break;
+		        case 40:
+		            //alert("down");
+		            rob.removeRobot();
+		            (y + 160) >= 800 ? y = 800 - 160 : y = y + 160;
+		            rob.loadRobot();
+		            break;
+			}
+			
+		}
+	}
+    
+</script>
